@@ -4,6 +4,8 @@ import numpy as np
 from ascii_magic import AsciiArt
 
 columns = 256
+font_size = 8
+w = int(columns * font_size / 1.66)
 
 class Img_to_ASCII:
     def __init__(self):
@@ -23,11 +25,10 @@ class Img_to_ASCII:
     CATEGORY = "image/img_to_ascii"
 
     def img_to_ascii(self, image):
-        #save file tmp
         image = tensor2pil(image)
         art = AsciiArt.from_pillow_image(image)
-        convert(art.to_ascii(monochrome=True, width_ratio=2.2, columns=columns))
-        return pil2tensor(image)
+        r = convert(art.to_ascii(monochrome=True, width_ratio=2.2, columns=columns))
+        return (pil2tensor(r), )
 
 # Tensor to PIL
 def tensor2pil(image):
@@ -38,12 +39,6 @@ def pil2tensor(image):
     return torch.from_numpy(np.array(image).astype(np.float32) / 255.0).unsqueeze(0)
 
 def convert(text, image_file=None):
-    #img in
-
-   #ascii out
-    font_size = 8
-    w = int(columns * font_size / 1.66)
-
     # font = ImageFont.truetype("LiberationMono.ttf", font_size)
     font = ImageFont.load_default()
     image = Image.new('RGBA', (w, w), (0, 0, 0, 0))
