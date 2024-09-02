@@ -1,8 +1,9 @@
 from PIL import Image, ImageFont, ImageDraw
 import torch
 import numpy as np
-from ascii_magic import AsciiArt 
-from fonts.ttf import Roboto
+from ascii_magic import AsciiArt
+
+columns = 256
 
 class Img_to_ASCII:
     def __init__(self):
@@ -22,9 +23,11 @@ class Img_to_ASCII:
     CATEGORY = "image/img_to_ascii"
 
     def img_to_ascii(self, image):
-        i = tensor2pil(image)
-        asciiPIL = convert(i)
-        return (pil2tensor(asciiPIL), )
+        #save file tmp
+        image = tensor2pil(image)
+        art = AsciiArt.from_pillow_image(image)
+        convert(art.to_ascii(monochrome=True, width_ratio=2.2, columns=columns))
+        return pil2tensor(image)
 
 # Tensor to PIL
 def tensor2pil(image):
@@ -34,20 +37,18 @@ def tensor2pil(image):
 def pil2tensor(image):
     return torch.from_numpy(np.array(image).astype(np.float32) / 255.0).unsqueeze(0)
 
-def convert(i):
+def convert(text, image_file=None):
     #img in
-    art = AsciiArt.from_image(i)
-    art.to_ascii(monochrome=True, width_ratio=2.2, columns=columns)
 
-    #ascii out
-    columns = 256
+   #ascii out
     font_size = 8
     w = int(columns * font_size / 1.66)
 
-    font = ImageFont.truetype("LiberationMono.ttf", font_size)
+    # font = ImageFont.truetype("LiberationMono.ttf", font_size)
+    font = ImageFont.load_default()
     image = Image.new('RGBA', (w, w), (0, 0, 0, 0))
     draw = ImageDraw.Draw(image)
-    draw.text((0, 0), art, spacing=4, fill='black', font=font)
+    draw.text((0, 0), text, spacing=4, fill='black', font=font)
     return image
 
 # A dictionary that contains all nodes you want to export with their names

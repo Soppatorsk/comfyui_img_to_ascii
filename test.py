@@ -1,6 +1,5 @@
 from ascii_magic import AsciiArt 
 from PIL import Image, ImageFont, ImageDraw
-from fonts.ttf import Roboto
 
 file = 'in.png'
 
@@ -10,7 +9,7 @@ font_size = 8
 w = int(columns * font_size / 1.66) 
 
 def convert(text, font_size=12, image_file=None):
-    font = ImageFont.truetype("LiberationMono.ttf", font_size)
+    font = ImageFont.truetype("./LiberationMono.ttf", font_size)
     # font = ImageFont.truetype("Courier New.ttf", font_size, encoding='utf-8')
     image = Image.new('RGBA', (w, w), (0, 0, 0, 0))
     draw = ImageDraw.Draw(image)

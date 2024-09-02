@@ -1,0 +1,5 @@
+setup.py
+ascii_magic.egg-info/PKG-INFO
+ascii_magic.egg-info/SOURCES.txt
+ascii_magic.egg-info/dependency_links.txt
+ascii_magic.egg-info/top_level.txt
