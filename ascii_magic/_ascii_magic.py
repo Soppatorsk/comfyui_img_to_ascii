@@ -231,11 +231,11 @@ class AsciiArt:
                     pixel = (pixel, pixel, 255) if color_palette is None else tuple(color_palette[pixel*3:pixel*3 + 3])
 
                 srgb = [(v/255.0)**2.2 for v in pixel]
-                # if pixel[3] < 200:
-                #     char = ' '
-                # else: 
-                #     char = chars[int(brightness * (len(chars) - 1))]
-                char = chars[int(brightness * (len(chars) - 1))]
+                if pixel[3] < 200:
+                    char = ' '
+                else: 
+                    char = chars[int(brightness * (len(chars) - 1))]
+                # char = chars[int(brightness * (len(chars) - 1))]
                 coloredChar = self._build_char(char, srgb, brightness, previousColor, mode, front)
                 line += coloredChar
                 if len(coloredChar) > 1:

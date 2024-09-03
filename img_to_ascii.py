@@ -26,6 +26,7 @@ class Img_to_ASCII:
 
     def img_to_ascii(self, image):
         image = tensor2pil(image)
+        image = image.convert("RGBA")
         art = AsciiArt.from_pillow_image(image)
         r = convert(art.to_ascii(monochrome=True, width_ratio=2.2, columns=columns))
         return (pil2tensor(r), )
