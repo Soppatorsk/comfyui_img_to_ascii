@@ -3,9 +3,6 @@ import torch
 import numpy as np
 from ascii_magic import AsciiArt
 
-columns = 256
-font_size = 8
-w = int(columns * font_size / 1.66)
 
 class Img_to_ASCII:
     def __init__(self):
@@ -16,6 +13,13 @@ class Img_to_ASCII:
         return {
             "required": {       
                 "image": ("IMAGE",),
+                "columns": ("INT", {"default": 256, "min": 1, "max": 512}),
+                "font_size": ("INT", {"default": 8, "min": 1, "max": 64}),
+                "width": ("INT", {"default": 1233, "min": 1, "max": 9999}),
+                "width_ratio": ("FLOAT", {"default": 1.45, "min": 0.1, "max": 10, "step": 0.01}),
+                "spacing": ("INT", {"default": 0, "min": 0, "max": 64}),
+                "font_path": ("STRING", {"default": "C:\lib.ttf"}),
+                "color": ("STRING", {"default": "black"}), 
             },
         }
 
@@ -24,12 +28,20 @@ class Img_to_ASCII:
 
     CATEGORY = "image/img_to_ascii"
 
-    def img_to_ascii(self, image):
+    def img_to_ascii(self, image, columns, font_size, width, width_ratio, spacing, font_path, color):
         image = tensor2pil(image)
         image = image.convert("RGBA")
+
         art = AsciiArt.from_pillow_image(image)
-        r = convert(art.to_ascii(monochrome=True, width_ratio=2.2, columns=columns))
-        return (pil2tensor(r), )
+        ascii = art.to_ascii(monochrome=True, width_ratio=width_ratio, columns=columns)
+
+        font = ImageFont.truetype(font_path, font_size)
+        # w = int(columns * font_size / 1.66)
+        image = Image.new('RGBA', (width, width), (0, 0, 0, 0))
+        draw = ImageDraw.Draw(image)
+        draw.text((0, 0), ascii, spacing=spacing, fill=color, font=font)
+ 
+        return (pil2tensor(image), )
 
 # Tensor to PIL
 def tensor2pil(image):
@@ -38,15 +50,6 @@ def tensor2pil(image):
 # PIL to Tensor
 def pil2tensor(image):
     return torch.from_numpy(np.array(image).astype(np.float32) / 255.0).unsqueeze(0)
-
-def convert(text,):
-    #tmp hardcoded
-    font = ImageFont.truetype("C:\lib.ttf", font_size)
-    # font = ImageFont.load_default()
-    image = Image.new('RGBA', (w, w), (0, 0, 0, 0))
-    draw = ImageDraw.Draw(image)
-    draw.text((0, 0), text, spacing=4, fill='black', font=font)
-    return image
 
 # A dictionary that contains all nodes you want to export with their names
 # NOTE: names should be globally unique
