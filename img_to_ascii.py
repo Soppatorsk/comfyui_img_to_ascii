@@ -38,9 +38,10 @@ def tensor2pil(image):
 def pil2tensor(image):
     return torch.from_numpy(np.array(image).astype(np.float32) / 255.0).unsqueeze(0)
 
-def convert(text, image_file=None):
-    # font = ImageFont.truetype("LiberationMono.ttf", font_size)
-    font = ImageFont.load_default()
+def convert(text,):
+    #tmp hardcoded
+    font = ImageFont.truetype("C:\lib.ttf", font_size)
+    # font = ImageFont.load_default()
     image = Image.new('RGBA', (w, w), (0, 0, 0, 0))
     draw = ImageDraw.Draw(image)
     draw.text((0, 0), text, spacing=4, fill='black', font=font)
