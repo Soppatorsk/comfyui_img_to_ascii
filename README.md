@@ -9,3 +9,6 @@ python -s -m pip install ComfyUI\custom_nodes\comfyui_img_to_ascii
 
 [Workflow example](https://github.com/Soppatorsk/comfyui_img_to_ascii/blob/main/example.json)
 ![Screenshot](https://github.com/Soppatorsk/comfyui_img_to_ascii/blob/main/example.png "workflow preview")
+
+![Screenshot](https://github.com/Soppatorsk/comfyui_img_to_ascii/blob/main/in.png "input")
+![Screenshot](https://github.com/Soppatorsk/comfyui_img_to_ascii/blob/main/out.png "output")
