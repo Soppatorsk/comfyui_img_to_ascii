@@ -1,2 +1,3 @@
-__pycache__/*
-ascii_magic/__pycache/*
+ascii_magic/__pycache/
+__pycache__/
+*.py[cod]
