@@ -15,6 +15,7 @@ _COLOR_DATA = [
 PALETTE = [[[(v/255.0)**2.2 for v in x[0]], x[1], x[2]] for x in _COLOR_DATA]
 
 # CHARS_BY_DENSITY = ' .`-_\':,;^=+/"|)\\<>)iv%xclrs{*}I?!][1taeo7zjLunT#JCwfy325Fp6mqSghVd4EgXPGZbYkOA&8U$@KHDBWNMR0Q'
-CHARS_BY_DENSITY = '''@%#*+=-:.'''
+# CHARS_BY_DENSITY = '''Q0RMNWBDHK@$U8&AOkYbZGPXgE4dVhgSqm6pF523yfwCJ#TnuLjz7oeat1[]!?I}*{srlcx%vi)><\\)|"/+=^;,:'\_-`. '''
+CHARS_BY_DENSITY = '''@%#*+=-:. '''
 
 DEFAULT_STYLES = 'display: inline-block; border-width: 4px 6px; border-color: black; border-style: solid; background-color:black; font-size: 8px;'

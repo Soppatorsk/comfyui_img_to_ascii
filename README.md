@@ -1,0 +1,1 @@
+.\python_embeded\python.exe -s -m pip install ComfyUI\custom_nodes\comfyui_img_to_ascii

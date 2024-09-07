@@ -1,9 +1,0 @@
-setup.py
-ascii_magic/__init__.py
-ascii_magic/_ascii_magic.py
-ascii_magic/constants.py
-ascii_magic/functions.py
-ascii_magic.egg-info/PKG-INFO
-ascii_magic.egg-info/SOURCES.txt
-ascii_magic.egg-info/dependency_links.txt
-ascii_magic.egg-info/top_level.txt
